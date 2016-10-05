@@ -1,15 +1,3 @@
-From c307c78e3292a4d665457930ecde3e2afc4ea179 Mon Sep 17 00:00:00 2001
-From: Quentin Perez <qperez42@gmail.com>
-Date: Tue, 4 Oct 2016 22:18:41 +0200
-Subject: [PATCH] add ld_library_path
-
-Signed-off-by: Quentin Perez <qperez42@gmail.com>
----
- src/google/protobuf/compiler/subprocess.cc | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/src/google/protobuf/compiler/subprocess.cc b/src/google/protobuf/compiler/subprocess.cc
-index e929e4f..4703b69 100644
 --- a/src/google/protobuf/compiler/subprocess.cc
 +++ b/src/google/protobuf/compiler/subprocess.cc
 @@ -300,6 +300,10 @@ void Subprocess::Start(const string& program, SearchMode search_mode) {
@@ -23,6 +11,3 @@ index e929e4f..4703b69 100644
    char* argv[2] = { strdup(program.c_str()), NULL };
  
    child_pid_ = fork();
--- 
-2.8.4 (Apple Git-73)
-
