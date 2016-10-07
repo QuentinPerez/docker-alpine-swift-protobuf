@@ -1,0 +1,31 @@
+#!/bin/bash
+
+
+if [ "$#" -ne 1 ]; then
+    echo 'usage: docker run ... PROTOC-GEN-SWIFT-VERSION'
+    exit 1
+fi
+
+VERSION=$1
+
+set -xe
+
+cd /root
+rm -fr *
+curl -Ls https://github.com/apple/swift-protobuf/archive/$VERSION.zip -O
+unzip $VERSION.zip
+cd swift-protobuf-$VERSION
+swift build -Xswiftc -static-stdlib -v -c release -Xlinker '-L/usr/lib/swift/linux/'
+
+cd .build/release
+mkdir -p export-lib/usr/lib/protoc-gen-swift-lib
+mkdir -p export-lib/lib64
+mkdir -p export-lib/usr/bin
+
+for lib in `ldd protoc-gen-swift | cut -d'>' -f2 | awk '{print $1}'` ; do    if [ -f "$lib" ] ; then cp -v "$lib" export-lib/usr/lib/protoc-gen-swift-lib;    fi  ; done
+mv export-lib/usr/lib/protoc-gen-swift-lib/ld-linux-x86-64.so.2 export-lib/lib64
+mv protoc-gen-swift export-lib/usr/bin
+cd export-lib && tar cvf export-lib-$VERSION.tar *
+mv export-lib-$VERSION.tar /export
+
+echo $VERSION
