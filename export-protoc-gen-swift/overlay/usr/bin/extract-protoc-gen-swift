@@ -6,15 +6,22 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 
-VERSION=$1
-
 set -xe
+
+VERSION=$1
 
 cd /root
 rm -fr *
-curl -Ls https://github.com/apple/swift-protobuf/archive/$VERSION.zip -O
-unzip $VERSION.zip
-cd swift-protobuf-$VERSION
+if [ "$VERSION" == "upstream" ]; then
+	git clone https://github.com/apple/swift-protobuf.git
+	cd swift-protobuf
+	VERSION=$(git rev-parse --short HEAD)
+else
+	curl -Ls https://github.com/apple/swift-protobuf/archive/$VERSION.zip -O
+	unzip $VERSION.zip
+	cd swift-protobuf-$VERSION
+fi
+
 swift build -Xswiftc -static-stdlib -v -c release -Xlinker '-L/usr/lib/swift/linux/'
 
 cd .build/release
