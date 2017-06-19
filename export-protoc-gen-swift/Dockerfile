@@ -1,8 +1,8 @@
 FROM ubuntu:xenial
 MAINTAINER QuentinPerez <qperez42@gmail.com>
 
-ENV SWIFT_VERSION=3.0.2-RELEASE
-ENV SWIFT_VERSION_LOW=3.0.2-release
+ENV SWIFT_VERSION=3.1.1-RELEASE
+ENV SWIFT_VERSION_LOW=3.1.1-release
 
 RUN apt-get update
 RUN apt-get install -y git curl unzip cmake ninja-build clang python uuid-dev libicu-dev icu-devtools libbsd-dev libedit-dev libxml2-dev libsqlite3-dev swig libpython-dev libncurses5-dev pkg-config libblocksruntime-dev libcurl4-openssl-dev
