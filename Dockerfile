@@ -1,8 +1,8 @@
 FROM alpine:3.4
 MAINTAINER Steeve Morin <steeve@zen.ly>
 
-ENV GRPC_VERSION=1.0.0 \
-    PROTOBUF_VERSION=3.1.0
+ENV GRPC_VERSION=1.3.7 \
+    PROTOBUF_VERSION=3.3.0
 
 ADD ./ressources/ld_library_path.patch /
 
