@@ -1,13 +1,14 @@
 FROM alpine:3.4
 MAINTAINER Steeve Morin <steeve@zen.ly>
 
-ENV GRPC_VERSION=1.3.7 \
-    PROTOBUF_VERSION=3.3.0
+ENV PROTOBUF_VERSION=3.3.0 \
+	SWIFT_PROTOBUF_VERSION=0.9.903 \
+	SWIFT_PROTOBUF_PREFIX=0.9.903
 
 ADD ./ressources/ld_library_path.patch /
 
 RUN apk add --no-cache build-base curl automake autoconf libtool && \
-    curl -L https://github.com/QuentinPerez/docker-alpine-swift-protobuf/releases/download/0.9.24/export-lib-0.9.24.tar | tar xv -C / && \
+    curl -L https://github.com/QuentinPerez/docker-alpine-swift-protobuf/releases/download/${SWIFT_PROTOBUF_VERSION}/export-lib-${SWIFT_PROTOBUF_PREFIX}.tar | tar xv -C / && \
     curl -L https://github.com/google/protobuf/archive/v${PROTOBUF_VERSION}.tar.gz | tar xvz && \
     cd /protobuf-${PROTOBUF_VERSION} && \
         autoreconf -f -i -Wall,no-obsolete && \
