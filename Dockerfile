@@ -1,5 +1,5 @@
 FROM alpine:3.4
-MAINTAINER Steeve Morin <steeve@zen.ly>
+MAINTAINER Quentin Perez <quentin@zen.ly>
 
 ENV PROTOBUF_VERSION=3.3.0 \
 	SWIFT_PROTOBUF_VERSION=0.9.903 \
